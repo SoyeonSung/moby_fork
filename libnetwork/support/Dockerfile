@@ -1,4 +1,4 @@
-FROM docker:27.4.1-dind
+FROM docker:27.5.0-dind
 
 RUN set -ex \
     && echo "http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
