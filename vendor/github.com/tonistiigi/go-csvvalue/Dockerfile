@@ -14,11 +14,11 @@ COPY --link --from=xx / /
 WORKDIR /src
 ARG TARGETPLATFORM
 
-FROM golang:1.24.1-alpine3.21 AS build
+FROM golang:1.25.2-alpine3.21 AS build
 RUN --mount=target=/root/.cache,type=cache \
     --mount=type=bind xx-go build .
 
-FROM golang:1.24.1-alpine3.21 AS runbench
+FROM golang:1.25.2-alpine3.21 AS runbench
 ARG BENCH_FILENAME
 RUN --mount=target=/root/.cache,type=cache \
     --mount=type=bind \
@@ -28,7 +28,7 @@ FROM scratch AS bench
 ARG BENCH_FILENAME
 COPY --from=runbench /tmp/${BENCH_FILENAME} /
 
-FROM golang:1.24.1-alpine3.21 AS runtest
+FROM golang:1.25.2-alpine3.21 AS runtest
 ARG TESTFLAGS="-v"
 ARG COVER_FILENAME
 RUN --mount=target=/root/.cache,type=cache \
